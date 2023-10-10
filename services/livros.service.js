@@ -11,10 +11,15 @@ function getLivroId(id) {
 }
 
 function inserirLivro(livroNovo) {
-    const livros = JSON.parse(fs.readFileSync("livros.json"))
-    const NovalistaLivros = [...livros, livroNovo]
-    console.log(livroNovo);
-    fs.writeFileSync('livros.json', JSON.stringify(NovalistaLivros, null, 2))
+    if (livroNovo) {
+        const livros = JSON.parse(fs.readFileSync("livros.json"))
+        const NovalistaLivros = [...livros, livroNovo]
+        console.log(livroNovo);
+        fs.writeFileSync('livros.json', JSON.stringify(NovalistaLivros, null, 2))
+        return true
+    } else {
+        return false
+    }
 
 }
 function atualizarLivro(id, body) {

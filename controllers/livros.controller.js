@@ -23,8 +23,7 @@ function getLivro(req, res) {
             const livro = getLivroId(id)
             livro ? res.send(livro) : res.status(422).send("Livro Não encontrado ou ID invalida!")
         } else {
-        res.status(404)
-        res.send("Livro não encontrado") 
+        res.status(404).send("Livro não encontrado") 
         }
     } catch (error) {
         res.status(500)
@@ -34,10 +33,11 @@ function getLivro(req, res) {
 function postLivro(req, res) {
     try {
         const livroNovo = req.body
-        if (livroNovo) {
-        inserirLivro(livroNovo)
-        res.status(201)
-        res.send("Livro adicionado com sucesso")
+        if (req.body.nome) {
+        const inserir = inserirLivro(livroNovo)
+        inserir ? res.status(201).send("Livro adicionado com sucesso") : res.status(404).send("Livro adicionado não inserido!") 
+        } else {
+            res.status(422).send("Ops, Algo deu errado, o campo nome é obrigatório!") 
         }
     } catch (error) {
         res.status(500)
