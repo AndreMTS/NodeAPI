@@ -3,6 +3,7 @@ const rotaLivro = require('./router/livro.router')
 
 const app = express()
 
+app.use(express.json())
 app.use('/livros', rotaLivro)
 
 const port = 8000
