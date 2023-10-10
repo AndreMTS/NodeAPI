@@ -32,10 +32,24 @@ function atualizarLivro(id, body) {
         return false
     }
 }
+function deletarLivro(id) {
+
+    const livros = JSON.parse(fs.readFileSync('livros.json'))
+    const index = livros.findIndex(livro => livro.id === id)
+
+    if (index !== -1) { 
+        const livrosAtualizados = livros.filter(livro => livro.id !== id);
+        fs.writeFileSync('livros.json', JSON.stringify(livrosAtualizados, null, 2))
+        return true
+    } else {
+        return false
+    }
+}
 
 module.exports = {
     getTodosLivros,
     getLivroId,
     inserirLivro,
-    atualizarLivro
+    atualizarLivro,
+    deletarLivro
 }
