@@ -1,4 +1,4 @@
-const { getTodosLivros, getLivroId, inserirLivro } = require('../services/livros.service')
+const { getTodosLivros, getLivroId, inserirLivro, atualizarLivro } = require('../services/livros.service')
 
 
 
@@ -33,10 +33,27 @@ function postLivro(req, res) {
         res.send(error.message)
     }
 }
+function updateLivro(req, res) {
+    try {
+        const { id } = req.params
+        const body = req.body
+        
+        const atualizacaoBemSucedida = atualizarLivro(id, body)
+
+        if (atualizacaoBemSucedida) {
+            res.status(200).send("Livro atualizado com sucesso")
+        } else {
+            res.status(404).send("Livro não encontrado")
+        }
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
 
 module.exports = {
     getLivros,
     getLivro,
-    postLivro
+    postLivro,
+    updateLivro
     
 }
