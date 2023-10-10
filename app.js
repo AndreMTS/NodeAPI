@@ -1,5 +1,5 @@
 const express = require('express')
-const rotaLivro = require('./router/livro')
+const rotaLivro = require('./router/livro.router')
 
 const app = express()
 
