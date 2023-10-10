@@ -14,7 +14,7 @@ function inserirLivro(livroNovo) {
     const livros = JSON.parse(fs.readFileSync("livros.json"))
     const NovalistaLivros = [...livros, livroNovo]
     console.log(livroNovo);
-    fs.writeFileSync('livros.json', JSON.stringify(NovalistaLivros))
+    fs.writeFileSync('livros.json', JSON.stringify(NovalistaLivros, null, 2))
 
 }
 function atualizarLivro(id, body) {
@@ -38,10 +38,13 @@ function deletarLivro(id) {
     const index = livros.findIndex(livro => livro.id === id)
 
     if (index !== -1) { 
+
         const livrosAtualizados = livros.filter(livro => livro.id !== id);
         fs.writeFileSync('livros.json', JSON.stringify(livrosAtualizados, null, 2))
-        return true
-    } else {
+    return true
+    
+} else {
+
         return false
     }
 }
